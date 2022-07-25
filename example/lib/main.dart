@@ -8,9 +8,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: CastSample()
-    );
+    return MaterialApp(home: CastSample());
   }
 }
 
@@ -55,7 +53,7 @@ class _CastSampleState extends State<CastSample> {
   }
 
   Widget _handleState() {
-    switch(_state) {
+    switch (_state) {
       case AppState.idle:
         return Text('ChromeCast not connected');
       case AppState.connected:
@@ -78,11 +76,8 @@ class _CastSampleState extends State<CastSample> {
           onPressed: () => _controller.seek(relative: true, interval: -10.0),
         ),
         _RoundIconButton(
-            icon: _playing
-                ? Icons.pause
-                : Icons.play_arrow,
-            onPressed: _playPause
-        ),
+            icon: _playing ? Icons.pause : Icons.play_arrow,
+            onPressed: _playPause),
         _RoundIconButton(
           icon: Icons.forward_10,
           onPressed: () => _controller.seek(relative: true, interval: 10.0),
@@ -93,7 +88,7 @@ class _CastSampleState extends State<CastSample> {
 
   Future<void> _playPause() async {
     final playing = await _controller.isPlaying();
-    if(playing) {
+    if (playing) {
       await _controller.pause();
     } else {
       await _controller.play();
@@ -108,7 +103,8 @@ class _CastSampleState extends State<CastSample> {
 
   Future<void> _onSessionStarted() async {
     setState(() => _state = AppState.connected);
-    await _controller.loadMedia('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+    await _controller.loadMedia(
+        'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
   }
 
   Future<void> _onRequestCompleted() async {
@@ -129,29 +125,17 @@ class _RoundIconButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback onPressed;
 
-  _RoundIconButton({
-    @required this.icon,
-    @required this.onPressed
-  });
+  _RoundIconButton({@required this.icon, @required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return RaisedButton(
-        child: Icon(
-            icon,
-            color: Colors.white
-        ),
+        child: Icon(icon, color: Colors.white),
         padding: EdgeInsets.all(16.0),
         color: Colors.blue,
         shape: CircleBorder(),
-        onPressed: onPressed
-    );
+        onPressed: onPressed);
   }
 }
 
-enum AppState {
-  idle,
-  connected,
-  mediaLoaded,
-  error
-}
+enum AppState { idle, connected, mediaLoaded, error }
