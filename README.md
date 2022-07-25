@@ -46,7 +46,7 @@ Add dependencies in your module (app-level) Gradle file (usually `android/app/bu
 
 ```groovy
 implementation 'com.google.android.gms:play-services-cast-framework:19.0.0'
-implementation 'com.google.android.exoplayer:extension-cast:2.11.5'
+implementation 'com.google.android.exoplayer:extension-cast:2.17.1'
 ```
 
 Set the theme of the MainActivity to `@style/Theme.AppCompat.NoActionBar` in the application manifest `android/app/src/main/AndroidManifest.xml`:
